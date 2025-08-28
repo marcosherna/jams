@@ -7,13 +7,11 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-// import { Audio } from "expo-av"; // si usas Expo
 
 import { Track } from "../types/Track";
 
 export default function SongList() {
   const [songs, setSongs] = useState([]);
-  //   const [sound, setSound] = useState(null);
 
   useEffect(() => {
     fetch("https://api.deezer.com/search?q=eminem")
@@ -22,33 +20,21 @@ export default function SongList() {
       .catch((err) => console.error(err));
   }, []);
 
-  async function playPreview(previewUrl: string) {
-    // if (sound) {
-    // //   await sound.unloadAsync();
-    // }
-    // const { sound: newSound } = await Audio.Sound.createAsync({
-    //   uri: previewUrl,
-    // });
-    // setSound(newSound);
-    // await newSound.playAsync();
-  }
-
-  const renderItem = ({ item }: { item: Track }) => (
-    <TouchableOpacity
-      onPress={() => playPreview(item.preview)}
-      style={styles.card}
-    >
-      <Image source={{ uri: item.album.cover }} style={styles.image} />
-      <View style={styles.info}>
-        <Text style={styles.title} numberOfLines={1}>
-          {item.title}
-        </Text>
-        <Text style={styles.artist} numberOfLines={1}>
-          {item.artist.name}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const renderItem = ({ item }: { item: Track }) => {
+    return (
+      <TouchableOpacity onPress={() => {}} style={styles.card}>
+        <Image source={{ uri: item.album.cover }} style={styles.image} />
+        <View style={styles.info}>
+          <Text style={styles.title} numberOfLines={1}>
+            {item.title}
+          </Text>
+          <Text style={styles.artist} numberOfLines={1}>
+            {item.artist.name}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View>
